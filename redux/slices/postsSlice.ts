@@ -1,6 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState: any = [
+export interface PostState {
+    id: number,
+    title: string,
+    description: string,
+}
+
+const initialState: PostState[] = [
     {
         id: 1,
         title: "Post 1",
@@ -12,7 +18,7 @@ const postsSlice = createSlice({
     name: "posts",
     initialState,
     reducers: {
-        addPosts: (state, action: PayloadAction<any>) => {
+        addPosts: (state, action) => {
             const { id, title, description } = action.payload;
             state.push({
                 id,
@@ -20,9 +26,9 @@ const postsSlice = createSlice({
                 description,
             });
         },
-        deletePosts: (state, action: PayloadAction<any>) => {
+        deletePosts: (state, action) => {
             const postId = action.payload;
-            return state.filter((post: any) => {
+            return state.filter((post) => {
                 post.id === postId
             });
         }
